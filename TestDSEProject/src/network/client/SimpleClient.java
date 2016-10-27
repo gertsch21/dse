@@ -49,30 +49,23 @@ public class SimpleClient {
 		
 	}
 	
-	public static void main(String[] args) throws IOException, ClassNotFoundException{
-		SimpleClient client = new SimpleClient(1234,"localhost");
-		
-		DataOutputStream out = client.getOut();
-		ObjectInputStream objIn = client.getobjIn();
+	public void beenden(){
+		try {
+			out.writeUTF("ende");
+		} catch (IOException e) {
+			System.err.println("SimpleClient:beenden: Fehler beim beenden("+e.getMessage()+")");
+		}
+	}
 	
-		
-		List<Benutzer> liste = client.getBenutzerListe();
-		
-		
-		out.writeUTF("pruefeLogin"+"-"+"gertsch"+"-"+"hallo");
-		
-		System.out.println("Loginantwort von Server: "+client.getDataIn().readUTF());
-		
-		out.writeUTF("getBenutzerByUname gertsch");
-	
-		System.out.println("User empfangen: "+((Person)objIn.readObject()).toString());
-		
-		out.writeUTF("ende");
-		
-		for(Benutzer a : liste)
-			System.out.println(a);
-		System.out.println("Client: erfolgreich beendet!");
-
+	public boolean pruefeLogin(String username, String password){
+		try{
+			this.getOut().writeUTF("pruefeLogin-"+username+"-"+password);
+			return (boolean)this.dataIn.readBoolean();
+			
+		}catch(IOException e){
+			System.err.println("SimpleClient:pruefeLogin: "+e.getMessage());
+			return false;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -88,6 +81,10 @@ public class SimpleClient {
 			return null;
 		}
 	}
+	
+	
+	
+	
 	public DataOutputStream getOut() {
 		return out;
 	}

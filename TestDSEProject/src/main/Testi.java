@@ -1,5 +1,8 @@
 package main;
 
+import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.util.List;
 import java.util.UUID;
 
 import dao.PersonDAO;
@@ -7,21 +10,26 @@ import dao.SerializedPersonDAO;
 import management.Benutzerverwaltung;
 import modell.Benutzer;
 import modell.Person;
+import network.client.SimpleClient;
 
 public class Testi {
 
 	public static void main(String[] args) {
+		SimpleClient client = new SimpleClient(1234,"localhost");
 		
-		Person neuePerson = new Benutzer(UUID.randomUUID(), "Gerhard","Schmidt", "gerhardschmidt@gmx.at","Roseldorf","Roseldorf","gertsch2","hallo");
+		List<Benutzer> liste = client.getBenutzerListe();
 		
-		Benutzerverwaltung benver = Benutzerverwaltung.getInstance();
-		
-		benver.benutzerAnlegen("Mirza", "Talic", "denso@gmx.at", "WelserStrasse", "Wien", "mirzi", "hallo");
+		for(Benutzer a : liste)
+			System.out.println(a);
+		System.out.println("Client: erfolgreich beendet!");
 
-		for(Person p : benver.getBenutzerListe())
-			System.out.println(p);
 		
+		if(client.pruefeLogin("mirzi", "hallo"))
+			System.out.println("Userdaten sind korrekt");
+		else
+			System.out.println("Inkorrekte Userdaten");
 		
+		client.beenden();
 	}
 
 }

@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import management.Benutzerverwaltung;
+import management.MyException;
 
 /**
  * 
@@ -71,31 +72,43 @@ public class SimpleServer extends Thread {
 
 			
 			String eingabe;
-
-			while((eingabe = inData.readUTF())!=null && !eingabe.equals("ende")){
-				String[] eingabeGesplittet = eingabe.trim().split("-");
-				String anfrage = eingabeGesplittet[0];
-	
-				System.out.println("Befehl von Client("+this.clientSocket.getInetAddress()+"): "+anfrage);
-				if (anfrage.equals("ende")){
-					System.out.println("Client("+this.clientSocket.getInetAddress()+") beendete Verbindung mittels Eingabe 'ende'");
-					break;
-				}
-	
-				if (anfrage.equals("getBenutzer"))
-					outObj.writeObject(benver.getBenutzerListe());
-	
-				if (anfrage.equals("pruefeLogin")) {
-					System.out.println(eingabeGesplittet[1] + " " + eingabeGesplittet[2]);
-					outData.writeUTF("loginBestätigt");
-					;
-				}
+			try{
+				while((eingabe = inData.readUTF())!=null && !eingabe.equals("ende")){
+					String[] eingabeGesplittet = eingabe.trim().split("-");
+					String anfrage = eingabeGesplittet[0];
+		
+					System.out.println("Befehl von Client("+this.clientSocket.getInetAddress()+"): "+anfrage);
+					if (anfrage.equals("ende")){
+						System.out.println("Client("+this.clientSocket.getInetAddress()+") beendete Verbindung mittels Eingabe 'ende'");
+						break;
+					}
+		
+					if (anfrage.equals("getBenutzer"))
+						outObj.writeObject(benver.getBenutzerListe());
+		
+					//Loginprüfung
+					if (anfrage.equals("pruefeLogin")) {
+						try{
+							String username = eingabeGesplittet[1];
+							String password = eingabeGesplittet[2];
+							if(username == null || password == null) throw  new MyException("Ein Parameter ist null"); 
+							if(!benver.pruefeLogin(username, password)) throw new MyException("Userdaten stimmen nicht mit Passwortdaten überein("+username+"/"+password+")");
+							outData.writeBoolean(true);
+						}catch(MyException e){
+							System.err.println("SimpleServer:pruefeLogin:"+e.getMessage());
+							outData.writeBoolean(false);
+						}
+						continue;
+					}
+					
 				
-				if(anfrage.equals("getBenutzerByUname")){
-					System.out.println("Client("+this.clientSocket.getInetAddress()+"): "+anfrage+", Uname: "+eingabeGesplittet[1]);
-					outObj.writeObject(benver.getBenByUsername(eingabeGesplittet[1]));
+					if(anfrage.equals("getBenutzerByUname")){
+						System.out.println("Client("+this.clientSocket.getInetAddress()+"): "+anfrage+", Uname: "+eingabeGesplittet[1]);
+						outObj.writeObject(benver.getBenByUsername(eingabeGesplittet[1]));
+					}
 				}
-				
+			}catch(Exception e){
+				//Da Port geschlossen wird, während er noch abhört, wird eine Exception geworfen, welche hiermit abgefangen wird
 			}
 
 			System.out.println("Server: Beende Connection mit Client("+this.clientSocket.getInetAddress()+")");
