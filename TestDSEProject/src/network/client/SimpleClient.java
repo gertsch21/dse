@@ -82,6 +82,20 @@ public class SimpleClient {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Produkt> getProduktListe(){
+		try {
+			this.getOut().writeUTF("getProdukte");
+			return (List<Produkt>)this.getobjIn().readObject();
+		} catch (IOException e) {
+			System.err.println("SimpleClient:getProduktListe: "+e.getMessage());
+			return null;
+		} catch (ClassNotFoundException e) {
+			System.err.println("SimpleClient:getProduktListe: "+e.getMessage());
+			return null;
+		}
+	}
+	
 	
 	
 	

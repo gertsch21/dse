@@ -11,6 +11,8 @@ import java.net.Socket;
 
 import management.Benutzerverwaltung;
 import management.MyException;
+import management.Produktgruppeverwaltung;
+import management.Produktverwaltung;
 
 /**
  * 
@@ -21,7 +23,10 @@ import management.MyException;
 public class SimpleServer extends Thread {
 
 	private static Benutzerverwaltung benver = Benutzerverwaltung.getInstance();
-
+	private static Produktverwaltung prodver = Produktverwaltung.getinstance();
+	private static Produktgruppeverwaltung prodgruver = Produktgruppeverwaltung.getinstance();
+	
+	
 	private Socket clientSocket;
 
 	private OutputStream rawOut;
@@ -83,9 +88,13 @@ public class SimpleServer extends Thread {
 						break;
 					}
 		
-					if (anfrage.equals("getBenutzer"))
+					
+					if (anfrage.equals("getBenutzer")){
 						outObj.writeObject(benver.getBenutzerListe());
-		
+						continue;
+					}
+					
+					
 					//Loginprüfung
 					if (anfrage.equals("pruefeLogin")) {
 						try{
@@ -101,10 +110,18 @@ public class SimpleServer extends Thread {
 						continue;
 					}
 					
+					
+					//getProdukte
+					if (anfrage.equals("getProdukte")){
+						outObj.writeObject(prodver.getAlleProdukt());
+						continue;
+					}
 				
+					//Get benutzer nach Usernamen
 					if(anfrage.equals("getBenutzerByUname")){
 						System.out.println("Client("+this.clientSocket.getInetAddress()+"): "+anfrage+", Uname: "+eingabeGesplittet[1]);
 						outObj.writeObject(benver.getBenByUsername(eingabeGesplittet[1]));
+						continue;
 					}
 				}
 			}catch(Exception e){
