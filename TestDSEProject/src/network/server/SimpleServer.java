@@ -43,6 +43,7 @@ public class SimpleServer extends Thread {
 			try {
 				while (true) {
 					System.out.println("Server wartet auf eine neue Verbindung!");
+					
 					new SimpleServer(serverSocket.accept());
 				}
 			} catch (IOException e) {

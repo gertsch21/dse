@@ -54,11 +54,7 @@ public class SimpleClient {
 		
 		DataOutputStream out = client.getOut();
 		ObjectInputStream objIn = client.getobjIn();
-		
-		
-		
-		
-		
+	
 		
 		List<Benutzer> liste = client.getBenutzerListe();
 		
