@@ -16,7 +16,7 @@ import network.client.SimpleClient;
 public class Testi {
 
 	public static void main(String[] args) {
-		SimpleClient client = new SimpleClient(1234,"localhost");
+		SimpleClient client = new SimpleClient(1234,"77.80.55.95");
 		
 		List<Benutzer> liste = client.getBenutzerListe();
 		List<Produkt>  produktliste = client.getProduktListe();
