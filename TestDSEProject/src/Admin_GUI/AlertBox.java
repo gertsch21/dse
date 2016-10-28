@@ -3,6 +3,9 @@ package Admin_GUI;
 import javafx.geometry.*;
 import javafx.scene.*;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 
