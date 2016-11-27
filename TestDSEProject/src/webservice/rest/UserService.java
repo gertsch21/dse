@@ -16,7 +16,7 @@ import management.Benutzerverwaltung;
 @Path("/user")
 public class UserService {
 	
-	Benutzerverwaltung benutzer = new Benutzerverwaltung();
+	Benutzerverwaltung benutzer = Benutzerverwaltung.getInstance();
 
 	@GET
     @Path("/login/{username}/{password}")
@@ -28,14 +28,14 @@ public class UserService {
 			
 		
 	}
-	
+
 	@GET
     @Path("login/{username}/{password}")
     @Produces(MediaType.TEXT_XML)
     public String einloggen(@PathParam("username") String usern, @PathParam("password") String pwd) {
 		if(benutzer.pruefeLogin(usern, pwd)==true)    return "<?xml version=\"1.0\"?>" + "Willkommen " +  usern + "</result>";
 		else return "<?xml version=\"1.0\"?>"+ "Bitte ueberpruefen Sie Benutzername und/oder Passwort" +"</result>";
-     
+
     }
      
     

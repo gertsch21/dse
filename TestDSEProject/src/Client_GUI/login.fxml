@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client_GUI.ControllerLogin">
+   <top>
+      <VBox prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="10.0">
+               <children>
+                  <TextField fx:id="unameinput" layoutX="10.0" layoutY="10.0" promptText="username" text="gertsch2" />
+                  <TextField fx:id="pwinput" promptText="password" text="hallo" />
+                  <Label fx:id="loginerror" prefHeight="17.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#loginClicked" text="Login" />
+               </children>
+               <opaqueInsets>
+                  <Insets top="2.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="283.0" prefWidth="166.0" spacing="10.0">
+               <children>
+                  <Label text="iBUY" textFill="#ddb67e">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="119.0" text="Not registered yet?" />
+                  <Button id="registerBtn" fx:id="registerloginBtn" mnemonicParsing="false" onAction="#registerClicked" prefHeight="27.0" prefWidth="139.0" text="Register Now" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="-20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <left>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <HBox spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="connectionBtn" mnemonicParsing="false" onAction="#checkClicked" text="Check Connection" />
+            <Region prefHeight="27.0" prefWidth="179.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="serverstatus" prefHeight="27.0" prefWidth="128.0" textAlignment="JUSTIFY">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</BorderPane>

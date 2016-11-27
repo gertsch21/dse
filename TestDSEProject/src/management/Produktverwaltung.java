@@ -1,4 +1,4 @@
-ï»¿/**Das Package Management beinhaltet Klassen die zu Verwaltung der Akteure benoetigt werden
+/**Das Package Management beinhaltet Klassen die zu Verwaltung der Akteure benoetigt werden
  *  
  * 
  */
@@ -68,7 +68,7 @@ public class Produktverwaltung {
 	}
 	
 	/**
-	 * @param parameter ist der vom User Ã¼bergebene Parameter zur produktsuche
+	 * @param parameter ist der vom User übergebene Parameter zur produktsuche
 	 * @return Liste der gefundenen Produkte
 	 */
 	public List<Produkt> sucheProdukt(String parameter){
@@ -91,10 +91,10 @@ public class Produktverwaltung {
 	}
 	
 	/**
-	 * @param id ist die aus der Produkt Lise zu lÃ¶schende ID fÃ¼r das jeweilige Produkt
-	 * @return gibt eine Funktion mit der id als Parameter an das ProduktDAO weiter zum lÃ¶schen
+	 * @param id ist die aus der Produkt Lise zu löschende ID für das jeweilige Produkt
+	 * @return gibt eine Funktion mit der id als Parameter an das ProduktDAO weiter zum löschen
 	 */
-	public boolean produktLoeschen(String id){//VerbesserungswÃ¼rdig!!!
+	public boolean produktLoeschen(String id){//Verbesserungswürdig!!!
 		System.out.println("Delete : " + id);
 		return this.dao.produktLoeschen(id);
 	}

@@ -1,4 +1,4 @@
-﻿/**
+/**
 *	Das Packet dient zum persistenten speichern der Benutzer und Produktdaten um spaeter 
 *	wieder darauf zugreifen zu koennen.
  * 
@@ -74,7 +74,7 @@ public class SerializedProduktgruppeDAO implements ProduktgruppeDAO {
 				ois.close();
 				is.close();
 			} catch (Exception e) {
-				System.err.println("Fehler beim Schlie�en: "+e);
+				System.err.println("Fehler beim Schlie?en: "+e);
 			}
 		}
 		
@@ -125,7 +125,7 @@ public class SerializedProduktgruppeDAO implements ProduktgruppeDAO {
 	/* (non-Javadoc)
 	 * @see dao.ProduktgruppeDAO#produktgruppeLoeschen(java.lang.String)
 	 */
-	public boolean produktgruppeLoeschen(String name) { // löschen  mit  ProduktID - Verbesserung ?
+	public boolean produktgruppeLoeschen(String name) { // l�schen  mit  ProduktID - Verbesserung ?
 		
 		boolean found = false;
 		List<Produktgruppe> myList = this.getProduktgruppeList();
@@ -156,7 +156,7 @@ public class SerializedProduktgruppeDAO implements ProduktgruppeDAO {
 			try {
 				this.myFile.createNewFile();
 			} catch (IOException e1) {
-				System.out.println("Error: File <ProduktgruppeListe> konnte nicht erstellt werden.(Gr�nde: fehlende Rechte,...)");
+				System.out.println("Error: File <ProduktgruppeListe> konnte nicht erstellt werden.(Gr?nde: fehlende Rechte,...)");
 			}
 	}
 	/**
